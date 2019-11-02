@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+  
+    <script>
+		var postID = 0;
+		function addPost(){
+		   var newDiv = document.createElement("DIV");
+		   var newPost = document.createElement("TEXTAREA");
+		   var text = document.createTextNode(postText);
+		   var post = newPost.appendChild(text);
+		   newDiv.appendChild(newPost);
+		   postID++;
+		   newDiv.id = "newDiv" + postID;
+		   newPost.rows = "6";
+		   newPost.cols = "100";
+		   //newPost.background-color = "#85929E";
+		   document.body.appendChild(newDiv);
+		   document.getElementById(newDiv.id).setAttribute("style","text-align: center");
+		   var postByText = document.createElement("DIV");
+		   var paragraphText = document.createTextNode("Posted by " + postName + " at " + postDate);
+		   postByText.appendChild(paragraphText);
+		   postByText.position = "relative";
+		   postByText.align = "center";
+		   newPost.disabled = true;
+		   document.body.appendChild(postByText);
+		}
+  </script>
+  
+  
+  
+  
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	
+	<style>
+  body {
+      font: 400 24px/1.8 Garamond, serif;
+      color: #AEB6BF;
+	  background-color: #196F3D;
+  }
+  
+  button {
+	  background-color: #85929E;
+	  padding: 14px 40px;
+	  border-radius: 20%;
+	  font-size: 98%;
+	  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	  color: #17202A;
+  }
+    
+  textarea {
+	  font-family: Trebuchet MS, cursive, sans-serif;
+	  font-size: 80%;
+	  background-color: #F6DDCC;
+	  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	  color: #17202A;
+	  readonly;
+  }
+  
+  input {
+	  background-color: #FDEBD0;
+	  font-size: 74%;
+  }
+  </style>
+	
+  </head>
+  <body>
+    <h1 style="text-align: center;"> Posts </h1>
+	
+	<!-- Container (Contact Section) -->
+
+    
+    	<form action="/post" method="post">
+      <div style="text-align: center;">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="postName" name="name" placeholder="Name" size="110" type="text" required>
+        </div>
+      </div>
+	  
+	  <div style="text-align: center;">
+      <textarea class="form-control" id="postBox" name="content" placeholder="Comment" rows="6" cols="100"> </textarea>
+	  </div>
+	  
+      <br>
+        	<input type="submit" value="Submit"/>
+
+      </form>
+      
+     <div th:each="map:${comments}">
+     <script>
+     
+     </script>
+	 <p th:text="${map.name}" id = "name"></p> 
+	 <p th:text="${map.date}" id = "date"></p>
+	 <p th:text="${map.content}" id = "content"></p><br>    
+	 <script>
+	 addPost();  
+	 </script>
+	 </div>
+
+ 
+  <br>
+  
+
+  </body>
+</html>
