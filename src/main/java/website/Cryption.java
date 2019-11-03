@@ -106,8 +106,10 @@ public class Cryption{
 		System.out.println("before QR====================================");
 		System.out.println(strForQR);
 		System.out.println("====================================");
-		String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s&size=%dx%d";
-		String requestUrlStr = String.format(requestTemplate, strForQR, QRSize, QRSize);
+		//String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s&size=%dx%d";
+		//String requestUrlStr = String.format(requestTemplate, strForQR, QRSize, QRSize);
+		String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s";
+		String requestUrlStr = String.format(requestTemplate, strForQR);
 		return requestUrlStr;
 //		Document htmlPage = Jsoup.connect(requestUrlStr).get();
 //		Elements img = htmlPage.getElementsByTag("img");
