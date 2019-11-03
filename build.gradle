@@ -35,4 +35,6 @@ dependencies {
     compile('org.slf4j:slf4j-api:1.7.25')
     compile('org.json:json:20160212')
     testCompile("junit:junit")
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 }

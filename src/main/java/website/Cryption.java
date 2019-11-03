@@ -10,9 +10,9 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class Cryption{
 	
@@ -103,4 +103,23 @@ public class Cryption{
 //		return imgSrc;
 	}
 	
+	/*
+	 * argument 
+	 * resultJsonStr: the returned (json form) string from QR Api
+	 * passward: patient password used for decryption
+	 * correctPid: patient id. If the pid in decrypted string does not agree, raise exception
+	 */
+	public static String decodeQR(String resultJsonStr, String password, int correctPid) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(resultJsonStr);
+		String encrypted = (String) json.get("data");
+		String decrypted = decrypt(encrypted, password);
+		String pidStr = decrypted.substring(0,8);
+		int pid = Integer.parseInt(pidStr);
+		if(pid != correctPid) {
+			throw new IllegalArgumentException("Wrong patient ID");
+		}
+		String description = decrypted.substring(8);
+		return description;
+	}
 }
