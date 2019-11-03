@@ -42,10 +42,12 @@ body, html {height: 100%}
     <div class="w3-container">
 		<form enctype="multipart/form-data" action="/decode" method="POST">
 <!-- MAX_FILE_SIZE (maximum file size in bytes) must precede the file input field used to upload the QR code image -->
-			<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+			<input class="w3-input w3-padding-16 w3-border" type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 <!-- The "name" of the input field has to be "file" as it is the name of the POST parameter -->
-			Choose QR code image to read/scan: <input name="file" type="file" />
-			<input type="submit" value="Read QR code" />
+			<p>Enter patient ID:</p> <input class="w3-input w3-padding-16 w3-border" name="pid" type="text" />
+			<p>Enter password:</p> <input class="w3-input w3-padding-16 w3-border" name="password" type="password" />
+			<p>Choose QR code image to read/scan:</p> <input class="w3-input w3-padding-16 w3-border"name="file" type="file" />
+			<button type="submit" class="w3-button">READ QR CODE</button>>
 </form>
 		
     </div>
