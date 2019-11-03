@@ -104,7 +104,7 @@ public class MainController {
 		model.addAttribute("age",profile.getAge());
 		model.addAttribute("gender",profile.getGender());
 		model.addAttribute("syndrome",profile.getSyndrome());
-		model.addAttribute("diagonosis",profile.getDiagnosis());
+		model.addAttribute("diagnosis",profile.getDiagnosis());
 		
 		return "profile";
 		
