@@ -72,7 +72,11 @@ public class Cryption{
 	public static String encryptProfile(Profile profile, String passward) {
 		String pidStr = Integer.toString(profile.getPid());
 		String pidStrFilled = String.format("%0"+ (8 - pidStr.length() )+"d%s",0 ,pidStr);
-		String strToEncrypt = pidStrFilled + profile.getDescription();
+		String strToEncrypt = pidStrFilled + profile.getName() + "\n" +
+								profile.getAge() + "\n" +
+								profile.getGender() + "\n" +
+								profile.getSyndrome() + "\n" +
+								profile.getDiagnosis();
 		String encryptedProfile = encrypt(strToEncrypt, passward);
 		return encryptedProfile;
 	}
@@ -83,6 +87,8 @@ public class Cryption{
 	 */
 	public static Profile decryptProfile(String encrypted, String password, int correctPid) {
 		String decrypted = decrypt(encrypted, password);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(decrypted);
 		
 		String description = decrypted.substring(8);
 		String pidStr = decrypted.substring(0,8);
@@ -115,8 +121,12 @@ public class Cryption{
 	 */
 	public static Profile decodeQR(String resultJsonStr, String password, int correctPid) throws ParseException {
 		JSONParser parser = new JSONParser();
-		JSONObject json = (JSONObject) parser.parse(resultJsonStr);
-		String encrypted = (String) json.get("data");
+		JSONArray jsonArr1 = (JSONArray) parser.parse(resultJsonStr);
+		JSONObject json1 = (JSONObject) jsonArr1.get(0);
+		JSONArray jsonArr2 = (JSONArray) json1.get("symbol");
+		JSONObject json2 = (JSONObject) jsonArr2.get(0);
+		String encrypted = (String) json2.get("data");
+		//String encrypted = data.toString();
 		
 		Profile patientProfile = decryptProfile(encrypted, password, correctPid);
 		return patientProfile;

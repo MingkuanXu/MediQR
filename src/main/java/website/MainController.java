@@ -68,8 +68,18 @@ public class MainController {
 	@RequestMapping("/decode")
 
 	public String decode(Model model) throws IOException, ParseException {
+		/*
+		String test = "qwertyuiopasdfghjklzxcvbnm";
+		String passwordTest = "12345";
+		String encrypted = Cryption.encrypt(test, passwordTest);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(encrypted);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		String decrypted = Cryption.decrypt(encrypted, passwordTest);
+		System.out.println(decrypted);
+		*/
 
-        URL url = new URL("https://api.qrserver.com/v1/read-qr-code/?fileurl=https://github.com/MingkuanXu/MediQR/blob/master/example/1.png");
+        URL url = new URL("https://api.qrserver.com/v1/read-qr-code/?fileurl=https://raw.githubusercontent.com/MingkuanXu/MediQR/master/example/1.jpeg");
         URLConnection conn = url.openConnection();
 
         // open the stream and put it into BufferedReader
