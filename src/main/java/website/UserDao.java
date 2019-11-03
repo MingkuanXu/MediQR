@@ -8,6 +8,10 @@ public class UserDao {
 	
 	static public String findUserPassword(int pid){
 		if(pid==1) return "12345";
+		if(pid==2) return "12345";
+		if(pid==3) return "12345";
+		if(pid==4) return "12345";
+		if(pid==5) return "12345";
 		else{
 			throw new IllegalArgumentException("Invalid pid");
 		}
