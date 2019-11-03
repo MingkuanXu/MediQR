@@ -12,6 +12,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven'
 
 bootJar {
     baseName = 'gs-serving-web-content'
@@ -30,5 +31,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
+    compile('org.jsoup:jsoup:1.11.3')
+    compile('org.slf4j:slf4j-api:1.7.25')
+    compile('org.json:json:20160212')
     testCompile("junit:junit")
 }
