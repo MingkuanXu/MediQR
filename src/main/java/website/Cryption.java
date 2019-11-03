@@ -104,6 +104,7 @@ public class Cryption{
 	public static String encodeQR(Profile profile, String passward) throws IOException {
 		String strForQR = encryptProfile(profile, passward);
 		System.out.println("before QR====================================");
+		strForQR = strForQR.replaceAll(" ", "_");
 		System.out.println(strForQR);
 		System.out.println("====================================");
 		//String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s&size=%dx%d";
@@ -132,6 +133,7 @@ public class Cryption{
 		String encrypted = (String) json2.get("data");
 		System.out.println("After QR====================================");
 		System.out.println(encrypted);
+		encrypted = encrypted.replaceAll("_", " ");
 		System.out.println("====================================");
 		
 		Profile patientProfile = decryptProfile(encrypted, password, correctPid);
