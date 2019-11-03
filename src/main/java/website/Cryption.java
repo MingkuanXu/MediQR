@@ -2,9 +2,6 @@ package website;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -22,11 +19,11 @@ public class Cryption{
 	private String QRPath;
 	private static SecretKeySpec secretKey;
 	private static byte[] key;
-	private static int QRSize;
+	private static final int QRSize = 300;
+	
 	
 	public void setQRPath (String QRPath, int QRSize) {
 		this.QRPath = QRPath;
-		this.QRSize = QRSize;
 	}
 	
 	public static void setKey(String myKey) {
@@ -99,14 +96,11 @@ public class Cryption{
 		String strForQR = encryptProfile(profile, passward);
 		String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s&size=%dx%d";
 		String requestUrlStr = String.format(requestTemplate, strForQR, QRSize, QRSize);
-		Document htmlPage = Jsoup.connect(requestUrlStr).get();
-		Elements img = htmlPage.getElementsByTag("img");
-		String imgSrc = img.attr("src");
-		return imgSrc;
+		return requestUrlStr;
+//		Document htmlPage = Jsoup.connect(requestUrlStr).get();
+//		Elements img = htmlPage.getElementsByTag("img");
+//		String imgSrc = img.attr("src");
+//		return imgSrc;
 	}
 	
-	public static String decodeQR(String resultJsonStr) {
-		parser parser = new JSONParser();
-		
-	}
 }

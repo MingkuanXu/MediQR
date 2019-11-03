@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title> Student Nutrition</title>
+</head>
+<body>
+	<h1>Student Nutrition</h1>
+	<div>
+		Leave a comment here:
+	</div>
+	<form action="/post" method="post">
+  	Name:<br>
+   	<input type="text" name="name" size="80" /><br>
+  	Content:<br>
+   	<input type="text" name="content" size="80" /><br>
+  	<input type="submit" value="Submit"/>
+	</form>
+	
+	<br>
+	<br>
+	<div>
+	All Comments:
+	</div>
+	<!-- Comments Start -->
+	 <div th:each="map:${comments}">
+	 <p th:text="${map.name}"></p> 
+	 <p th:text="${map.date}"></p>
+	 <p th:text="${map.content}"></p><br>                        			
+	 </div>
+	 <!-- Blog Post End -->
+
+	 
+	
+	
+	
+</body>
+</html>

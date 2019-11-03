@@ -15,13 +15,54 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;    
 
 
 @Controller
 public class MainController {
 	
-
+	
+	
+	@PostMapping("/encode")
+	public String encode(@RequestParam(name="pid") int pid,
+	 @RequestParam(name="description") String description) throws IOException {
+		
+//		Cryption cryption = new Cryption();
+		
+		String password = UserDao.findUserPassword(pid);
+		
+		Profile patient = new Profile(pid,description);
+		
+		String imageUrl = Cryption.encodeQR(patient, password);
+		
+		System.out.printf(imageUrl);
+	
+		
+		String re = "redirect:/image?url="/*+keyword;*/+URLEncoder.encode(imageUrl, "utf-8"); //进行搜索
+		return re;
+		
+//		return imageUrl;
+//		return "http://google.com";
+	}
+	
+	
+	
+	
+	@RequestMapping("/image")
+	public String imagepage(@RequestParam(name="url") String url, Model model)  {
+		model.addAttribute("url",url);
+		return "image";
+	}
+	
+	/*@PostMapping("/")
+	public String encode2(@RequestParam(name="pid") String pid,
+	 @RequestParam(name="description") String description) {
+		System.out.printf("Index Recieved");
+		return "/";
+	}*/
+	/*
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
@@ -31,7 +72,7 @@ public class MainController {
     
     @GetMapping("/post")
     public String displayPostPage(Model model) throws FileNotFoundException{
-    		List<Map<String, String>> comments = CommentsDao.extractFromFile();
+    		List<Map<String, String>> comments = UserDao.extractFromFile();
     		model.addAttribute("comments",comments);
     		return "healthy_posts";
     }
@@ -46,10 +87,11 @@ public class MainController {
     		date = String.join(" ",date.split("T"));
     		
     		
-        CommentsDao.writeToFile(name,date,content);
+        UserDao.writeToFile(name,date,content);
 		//return "redirect:/";
         return "redirect:/post";
     }
+    */
     
     /*
     @RequestMapping("/display")
@@ -60,8 +102,8 @@ public class MainController {
     		return "test";
     }*/
     
-    
-    
-    
     //@RequestMapping("/")
+	
+	
+	
 }
