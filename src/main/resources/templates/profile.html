@@ -1,10 +1,88 @@
- <html xmlns:th="http://www.thymeleaf.org">
- <div>
-	<p>pid = </p><p th:text = ${pid}>
-	<p>Name = </p><p th:text = ${name}>
-	<p>Age = </p><p th:text = ${age}>
-	<p>Gender = </p><p th:text = ${gender}>
-	<p>Syndrome = </p><p th:text = ${syndrome}>
-	<p>Diagnosis = </p><p th:text = ${diagnosis}>
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>Decoded Medical Profile</b></h1>
+</header>
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+    <img src="https://singularityhub.com/wp-content/uploads/2018/07/healthcare_shutterstock_277918613-1068x601.jpg" alt="Nature" style="width:100%">
+    <div class="w3-container">
+      <h3><b>Patient Information</b></h3>
+      <h4>Name</h4> <b th:text = ${name}></b>
+      <h4>Age</h4> <b th:text = ${age}></b>
+      <h4>Gender</h4> <b th:text = ${gender}></b>
+    </div>
+
+    <div class="w3-container">
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <h4>                  </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+  <img src="https://www.southcoast.org/wp-content/uploads/2019/09/GettyImages-678799308-1.jpg" alt="Norway" style="width:100%">
+    <div class="w3-container">
+      <h3><b>Medical Information</b></h3>
+      <h4>Syndrome</h4>
+        <b th:text = ${syndrome}></b>
+      <h4>Diagnosis</h4>
+      	<b th:text = ${diagnosis}></b>
+    </div>
+  </div>
+<!-- END BLOG ENTRIES -->
 </div>
- </html> 
+
+<!-- Introduction menu -->
+<div class="w3-col l4">
+  <!-- About Card -->
+  <div class="w3-card w3-margin w3-margin-top">
+  <img src="https://i.pinimg.com/originals/f8/5b/c1/f85bc10f0e56e5e0a76a39593fc6eb26.jpg" style="width:100%">
+    <div class="w3-container w3-white">
+      <h4><b>About MediQR</b></h4>
+      <p>MediQR is a platform for convenient and secure medical record sharing. The QR code for each patient can only be decoded with the patient's password. The Medical profile on the left cannot be shown to any one except for the patient himself/herself. Even if the QR code is leaked, the profile will still be safe and remain crypted.</p>
+    </div>
+  </div><hr>
+  
+<!-- END Introduction Menu -->
+</div>
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+  <p>MediQR - Convenient and Secure Medical Record Sharing</p>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
