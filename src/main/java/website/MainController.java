@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Controller;
@@ -66,7 +67,7 @@ public class MainController {
 
 	@RequestMapping("/decode")
 
-	public String decode(Model model) throws IOException {
+	public String decode(Model model) throws IOException, ParseException {
 
         URL url = new URL("https://api.qrserver.com/v1/read-qr-code/?fileurl=https://github.com/MingkuanXu/MediQR/blob/master/src/main/resources/static/FamilyDinner2.jpeg");
         URLConnection conn = url.openConnection();
@@ -85,20 +86,15 @@ public class MainController {
 
         System.out.println(jsonInfo);
         
+        Profile profile = Cryption.decodeQR(jsonInfo, "12345", 1);
         
-        int pid = 1;
-        String name = "Name1";
-        String age = "20";
-        String gender = "Male";
-        String syndrome = "Fever";
-        String diagonosis = "Malaria";
    
-		model.addAttribute("pid",pid);
-		model.addAttribute("name",name);
-		model.addAttribute("age",age);
-		model.addAttribute("gender",gender);
-		model.addAttribute("syndrome",syndrome);
-		model.addAttribute("diagonosis",diagonosis);
+		model.addAttribute("pid",profile.getPid());
+		model.addAttribute("name",profile.getName());
+		model.addAttribute("age",profile.getAge());
+		model.addAttribute("gender",profile.getGender());
+		model.addAttribute("syndrome",profile.getSyndrome());
+		model.addAttribute("diagonosis",profile.getDiagnosis());
 		
 		return "profile";
 		
