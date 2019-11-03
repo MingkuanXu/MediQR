@@ -74,7 +74,8 @@ public class MainController {
 		String decrypted = Cryption.decrypt(encrypted, passwordTest);
 		System.out.println(decrypted);
 		*/
-        URL url = new URL("https://api.qrserver.com/v1/read-qr-code/?fileurl=https://raw.githubusercontent.com/MingkuanXu/MediQR/master/example/1.png");
+		String link = String.format("https://api.qrserver.com/v1/read-qr-code/?fileurl=https://raw.githubusercontent.com/MingkuanXu/MediQR/master/example/%d.png", pid);
+        URL url = new URL(link);
         URLConnection conn = url.openConnection();
 
         // open the stream and put it into BufferedReader
