@@ -9,7 +9,7 @@
 body,h1,h5 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
 .bgimg {
-  background-image: url('background.jpg');
+  background-image: url('background-new.jpg');
   min-height: 100%;
   background-position: center;
   background-size: cover;
@@ -22,22 +22,55 @@ body, html {height: 100%}
     <p>MediQR</p>
   </div>
   <div class="w3-display-topleft w3-container w3-xlarge">
+   <p><button onclick="document.getElementById('info').style.display='block'" class="w3-button w3-black">About MediQR</button></p>
     <p><button onclick="document.getElementById('menu').style.display='block'" class="w3-button w3-black">Decode Profile</button></p>
     <p><button onclick="document.getElementById('contact').style.display='block'" class="w3-button w3-black">Encode Profile</button></p>
   </div>
   <div class="w3-display-bottomleft w3-container">
-    <p class="w3-xlarge">HackDuke | November 2rd, 2019</p>
-    <p class="w3-large">Duke University</p>
-    <p>powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    <p class="w3-xlarge">Convenient and Secure Medical Record Sharing</p>
+
+    <p class="w3-large"> HackDuke 2019</p>
+    <p>Ziyi Wang, Mingkuan Xu</p>
   </div>
 </div>
 
 <!-- Menu Modal -->
+
+<div id="info" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+        <span onclick="document.getElementById('info').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <h1>What do we do?</h1></div>
+    <div class="w3-container">
+      <h5>
+      MediQR is an online platform helping to protect the privacy of your medical information by transforming it into encrypted QR code.
+      </h5>
+    </div>
+     <div class="w3-container w3-black">
+       <h1>Why this matters?</h1>
+    </div>
+    <div class="w3-container">
+      <h5>
+     Most of us believe that the medical and health information is a part of personal privacy and should be protected. We have perfect rights over our information and who can receive and view them is strictly restricted by the Federal Law[1]. Unfortunately, whether our health information is secure enough or not has become a problem.  According to the Identity Theft Resource Center (ITRC), 43.1 percent of all consumer data breaches reported in 2013 involved medical records, far more than the number of breaches involving banking and financial information or military or educational records. More surprisingly, while hacking is usually considered as the major cause of this breaches, there is an increasing number of “insider-theft” cases, where the information of a patient is illegally accessed by employees like nurses or other doctors.
+      </h5>
+    </div>
+       <div class="w3-container w3-black">
+       <h1>How do we manage to do this?</h1>
+    </div>
+    <div class="w3-container">
+      <h5>
+      MediQR is implemented as a website, built based on the Java framework SpringMVC. The website can either transform a patient profile into a QR code encrypted by the patient id, or decrypted such a QR code based on the id and password, so that the profiles of patients into small-sized, encrypted, and safe QR codes, the hidden information of which can only be accessed by the doctor who wrote the profile and the patient via a unique password.  
+      </h5>
+    </div>
+     
+  </div>
+</div>
+
 <div id="menu" class="w3-modal">
   <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-black w3-display-container">
       <span onclick="document.getElementById('menu').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-      <h1>Starters</h1>
+      <h1>Decode Profile</h1>
     </div>
     <div class="w3-container">
 		<form enctype="multipart/form-data" action="/decode" method="POST">
