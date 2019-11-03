@@ -77,6 +77,8 @@ public class Cryption{
 								profile.getGender() + "\n" +
 								profile.getSyndrome() + "\n" +
 								profile.getDiagnosis();
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(strToEncrypt);
 		String encryptedProfile = encrypt(strToEncrypt, passward);
 		return encryptedProfile;
 	}
