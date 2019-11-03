@@ -48,8 +48,8 @@ public class Cryption{
 			setKey(secret);
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-			//return Base64.getEncoder().encodeToString(cipher.doFinal(strInput.getBytes("UTF-8")));
-			return strInput;
+			return Base64.getEncoder().encodeToString(cipher.doFinal(strInput.getBytes("UTF-8")));
+			//return strInput;
 		}
 		catch (Exception e) {
 			System.out.println("Error while encrypting: " + e.toString());
@@ -62,8 +62,8 @@ public class Cryption{
 			setKey(secret);
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
 			cipher.init(Cipher.DECRYPT_MODE, secretKey);
-			//return new String(cipher.doFinal(Base64.getDecoder().decode(strInput)));
-			return strInput;
+			return new String(cipher.doFinal(Base64.getDecoder().decode(strInput)));
+			//return strInput;
 		}
 		catch (Exception e) {
 			System.out.println("Error while decrypting: " + e.toString());
@@ -128,6 +128,7 @@ public class Cryption{
 	public static Profile decodeQR(String resultJsonStr, String password, int correctPid) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONArray jsonArr1 = (JSONArray) parser.parse(resultJsonStr);
+		System.out.println(jsonArr1);
 		JSONObject json1 = (JSONObject) jsonArr1.get(0);
 		JSONArray jsonArr2 = (JSONArray) json1.get("symbol");
 		JSONObject json2 = (JSONObject) jsonArr2.get(0);
