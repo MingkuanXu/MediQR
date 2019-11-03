@@ -105,6 +105,7 @@ public class Cryption{
 		String strForQR = encryptProfile(profile, passward);
 		System.out.println("before QR====================================");
 		strForQR = strForQR.replaceAll(" ", "_");
+		strForQR = strForQR.replaceAll("\n", "+");
 		System.out.println(strForQR);
 		System.out.println("====================================");
 		//String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s&size=%dx%d";
@@ -134,6 +135,7 @@ public class Cryption{
 		System.out.println("After QR====================================");
 		System.out.println(encrypted);
 		encrypted = encrypted.replaceAll("_", " ");
+		encrypted = encrypted.replaceAll("+", "\n");
 		System.out.println("====================================");
 		
 		Profile patientProfile = decryptProfile(encrypted, password, correctPid);
