@@ -103,12 +103,10 @@ public class Cryption{
 	
 	public static String encodeQR(Profile profile, String passward) throws IOException {
 		String strForQR = encryptProfile(profile, passward);
-		System.out.println("before QR====================================");
+
 		strForQR = strForQR.replaceAll(" ", "_");
 		strForQR = strForQR.replaceAll("\n", "CHANGELINE");
 		strForQR = strForQR.replaceAll("\\+", "PLUS");
-		System.out.println(strForQR);
-		System.out.println("====================================");
 		//String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s&size=%dx%d";
 		//String requestUrlStr = String.format(requestTemplate, strForQR, QRSize, QRSize);
 		String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s";
@@ -129,17 +127,13 @@ public class Cryption{
 	public static Profile decodeQR(String resultJsonStr, String password, int correctPid) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONArray jsonArr1 = (JSONArray) parser.parse(resultJsonStr);
-		System.out.println(jsonArr1);
 		JSONObject json1 = (JSONObject) jsonArr1.get(0);
 		JSONArray jsonArr2 = (JSONArray) json1.get("symbol");
 		JSONObject json2 = (JSONObject) jsonArr2.get(0);
 		String encrypted = (String) json2.get("data");
-		System.out.println("After QR====================================");
-		System.out.println(encrypted);
 		encrypted = encrypted.replaceAll("_", " ");
 		encrypted = encrypted.replaceAll("CHANGELINE", "\n");
 		encrypted = encrypted.replaceAll("PLUS", "+");
-		System.out.println("====================================");
 		
 		Profile patientProfile = decryptProfile(encrypted, password, correctPid);
 		return patientProfile;

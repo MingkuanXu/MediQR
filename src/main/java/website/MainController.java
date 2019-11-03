@@ -39,8 +39,8 @@ public class MainController {
 		
 		String[] description = new String[5];
 		description[0] = name;
-		description[1] = gender;
-		description[2] = age;
+		description[1] = age;
+		description[2] = gender;
 		description[3] = syndrome;
 		description[4] = diagnosis;
 
