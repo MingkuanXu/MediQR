@@ -69,7 +69,7 @@ public class MainController {
 
 	public String decode(Model model) throws IOException, ParseException {
 
-        URL url = new URL("https://api.qrserver.com/v1/read-qr-code/?fileurl=https://github.com/MingkuanXu/MediQR/blob/master/src/main/resources/static/FamilyDinner2.jpeg");
+        URL url = new URL("https://api.qrserver.com/v1/read-qr-code/?fileurl=https://github.com/MingkuanXu/MediQR/blob/master/example/1.png");
         URLConnection conn = url.openConnection();
 
         // open the stream and put it into BufferedReader
