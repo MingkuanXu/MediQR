@@ -26,10 +26,23 @@ public class MainController {
 	
 	
 	@PostMapping("/encode")
-	public String encode(@RequestParam(name="pid") int pid,
-	 @RequestParam(name="description") String description) throws IOException {
+	public String encode(
+			@RequestParam(name="pid") int pid,
+			@RequestParam(name="name") String name,
+			@RequestParam(name="gender") String gender,
+			@RequestParam(name="age") String age,
+			@RequestParam(name="syndrome") String syndrome,
+			@RequestParam(name="diagonosis") String diagnosis
+			) throws IOException {
 		
 //		Cryption cryption = new Cryption();
+		
+		String[] description = new String[5];
+		description[0] = name;
+		description[1] = gender;
+		description[2] = age;
+		description[3] = syndrome;
+		description[4] = diagnosis;
 		
 		String password = UserDao.findUserPassword(pid);
 		
@@ -39,7 +52,6 @@ public class MainController {
 		
 		System.out.printf(imageUrl);
 	
-		
 		String re = "redirect:/image?url="/*+keyword;*/+URLEncoder.encode(imageUrl, "utf-8"); //进行搜索
 		return re;
 		

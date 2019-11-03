@@ -81,14 +81,18 @@ public class Cryption{
 	/*
 	 * String first eight digits: pid
 	 */
-	public static Profile decryptProfile(String encrypted, String passward) {
-		String decrypted = decrypt(encrypted, passward);
+	public static Profile decryptProfile(String encrypted, String password, int correctPid) {
+		String decrypted = decrypt(encrypted, password);
 		
 		String description = decrypted.substring(8);
 		String pidStr = decrypted.substring(0,8);
 		int pid = Integer.parseInt(pidStr);
+		if(pid != correctPid) {
+			throw new IllegalArgumentException("Wrong patient ID");
+		}
+		String[] profileAttrs = description.split("\n");
 		
-		Profile profile = new Profile(pid, description);
+		Profile profile = new Profile(pid, profileAttrs);
 		return profile;
 	}
 	
@@ -109,17 +113,12 @@ public class Cryption{
 	 * passward: patient password used for decryption
 	 * correctPid: patient id. If the pid in decrypted string does not agree, raise exception
 	 */
-	public static String decodeQR(String resultJsonStr, String password, int correctPid) throws ParseException {
+	public static Profile decodeQR(String resultJsonStr, String password, int correctPid) throws ParseException {
 		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(resultJsonStr);
 		String encrypted = (String) json.get("data");
-		String decrypted = decrypt(encrypted, password);
-		String pidStr = decrypted.substring(0,8);
-		int pid = Integer.parseInt(pidStr);
-		if(pid != correctPid) {
-			throw new IllegalArgumentException("Wrong patient ID");
-		}
-		String description = decrypted.substring(8);
-		return description;
+		
+		Profile patientProfile = decryptProfile(encrypted, password, correctPid);
+		return patientProfile;
 	}
 }
