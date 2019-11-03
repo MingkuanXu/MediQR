@@ -48,7 +48,8 @@ public class Cryption{
 			setKey(secret);
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-			return Base64.getEncoder().encodeToString(cipher.doFinal(strInput.getBytes("UTF-8")));
+			//return Base64.getEncoder().encodeToString(cipher.doFinal(strInput.getBytes("UTF-8")));
+			return strInput;
 		}
 		catch (Exception e) {
 			System.out.println("Error while encrypting: " + e.toString());
@@ -61,7 +62,8 @@ public class Cryption{
 			setKey(secret);
 			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
 			cipher.init(Cipher.DECRYPT_MODE, secretKey);
-			return new String(cipher.doFinal(Base64.getDecoder().decode(strInput)));
+			//return new String(cipher.doFinal(Base64.getDecoder().decode(strInput)));
+			return strInput;
 		}
 		catch (Exception e) {
 			System.out.println("Error while decrypting: " + e.toString());
@@ -77,8 +79,6 @@ public class Cryption{
 								profile.getGender() + "\n" +
 								profile.getSyndrome() + "\n" +
 								profile.getDiagnosis();
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(strToEncrypt);
 		String encryptedProfile = encrypt(strToEncrypt, passward);
 		return encryptedProfile;
 	}
@@ -89,9 +89,6 @@ public class Cryption{
 	 */
 	public static Profile decryptProfile(String encrypted, String password, int correctPid) {
 		String decrypted = decrypt(encrypted, password);
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(decrypted);
-		
 		String description = decrypted.substring(8);
 		String pidStr = decrypted.substring(0,8);
 		int pid = Integer.parseInt(pidStr);
@@ -106,6 +103,9 @@ public class Cryption{
 	
 	public static String encodeQR(Profile profile, String passward) throws IOException {
 		String strForQR = encryptProfile(profile, passward);
+		System.out.println("before QR====================================");
+		System.out.println(strForQR);
+		System.out.println("====================================");
 		String requestTemplate = "https://api.qrserver.com/v1/create-qr-code/?data=%s&size=%dx%d";
 		String requestUrlStr = String.format(requestTemplate, strForQR, QRSize, QRSize);
 		return requestUrlStr;
@@ -128,7 +128,9 @@ public class Cryption{
 		JSONArray jsonArr2 = (JSONArray) json1.get("symbol");
 		JSONObject json2 = (JSONObject) jsonArr2.get(0);
 		String encrypted = (String) json2.get("data");
-		//String encrypted = data.toString();
+		System.out.println("After QR====================================");
+		System.out.println(encrypted);
+		System.out.println("====================================");
 		
 		Profile patientProfile = decryptProfile(encrypted, password, correctPid);
 		return patientProfile;
