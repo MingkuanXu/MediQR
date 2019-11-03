@@ -2,15 +2,9 @@ package website;
 
 
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.parser.ParseException;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,8 +39,8 @@ public class MainController {
 		
 		String[] description = new String[5];
 		description[0] = name;
-		description[1] = gender;
-		description[2] = age;
+		description[1] = age;
+		description[2] = gender;
 		description[3] = syndrome;
 		description[4] = diagnosis;
 
@@ -56,7 +50,7 @@ public class MainController {
 		
 		String imageUrl = Cryption.encodeQR(patient, password);
 		
-		System.out.printf(imageUrl);
+//		System.out.printf(imageUrl);
 	
 		String re = "redirect:/image?url="/*+keyword;*/+URLEncoder.encode(imageUrl, "utf-8"); //进行搜索
 		return re;
@@ -67,7 +61,9 @@ public class MainController {
 
 	@RequestMapping("/decode")
 
-	public String decode(Model model) throws IOException, ParseException {
+	public String decode(@RequestParam(name="password") String password,
+			@RequestParam(name="pid") int pid,
+			Model model) throws IOException, ParseException {
 		/*
 		String test = "00000001Jingchao\n30\nmale\nHackduke\nmalaria";
 		String passwordTest = "12345";
@@ -78,7 +74,6 @@ public class MainController {
 		String decrypted = Cryption.decrypt(encrypted, passwordTest);
 		System.out.println(decrypted);
 		*/
-
         URL url = new URL("https://api.qrserver.com/v1/read-qr-code/?fileurl=https://raw.githubusercontent.com/MingkuanXu/MediQR/master/example/1.png");
         URLConnection conn = url.openConnection();
 
@@ -96,7 +91,7 @@ public class MainController {
 
         System.out.println(jsonInfo);
         
-        Profile profile = Cryption.decodeQR(jsonInfo, "12345", 1);
+        Profile profile = Cryption.decodeQR(jsonInfo, password, pid);
         
    
 		model.addAttribute("pid",profile.getPid());
